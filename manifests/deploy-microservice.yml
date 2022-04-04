@@ -2,26 +2,26 @@ kind: Deployment
 apiVersion: apps/v1
 metadata:
     labels:
-        app: densolo-microservice
+        app: denny-solo-microservice
         stack: frontend
         source: demo
-    name: densolo-microservice
+    name: denny-solo-microservice
     namespace: microservices
 spec:
     replicas: 5
     selector:
         matchLabels:
-            run: densolo-microservice
+            run: denny-solo-microservice
     template:
         metadata:
             labels:
-                app: densolo-microservice
-                run: densolo-microservice
+                app: denny-solo-microservice
+                run: denny-solo-microservice
                 source: demo
         spec:
             containers:
-                -   image: 219099013464.dkr.ecr.us-west-2.amazonaws.com/densolo-microservice
-                    name: densolo-microservice
+                -   image: 219099013464.dkr.ecr.us-west-2.amazonaws.com/denny-solo-microservice
+                    name: denny-solo-microservice
                     ports:
                         -   name: web
                             containerPort: 8080
@@ -31,14 +31,14 @@ kind: Service
 apiVersion: v1
 metadata:
     labels:
-        app: densolo-microservice-service
+        app: denny-solo-microservice-service
         stack: frontend
-    name: densolo-microservice-service
+    name: denny-solo-microservice-service
     namespace: microservices
 spec:
     selector:
         source: demo
-        app: densolo-microservice
+        app: denny-solo-microservice
     ports:
         -   name: web
             protocol: TCP
@@ -54,15 +54,15 @@ metadata:
         stack: frontend
     annotations:
         nginx.ingress.kubernetes.io/rewrite-target: /$2
-    name: densolo-ingress
+    name: denny-solo-ingress
     namespace: microservices
 spec:
     rules:
         -   http:
                 paths:
-                    -   path: /densolo(/|$)(.*)
+                    -   path: /denny-solo(/|$)(.*)
                         backend:
-                            serviceName: densolo-microservice-service
+                            serviceName: denny-solo-microservice-service
                             servicePort: 30201
 
 
